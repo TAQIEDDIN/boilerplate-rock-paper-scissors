@@ -120,3 +120,30 @@ def human(prev_opponent_play):
 
 def random_player(prev_opponent_play):
     return random.choice(['R', 'P', 'S'])
+    # RPS_game.py - You should not modify this file.
+
+def play(player1, player2, num_games=1000, verbose=False):
+    results = {"Player 1": 0, "Player 2": 0}
+    for i in range(num_games):
+        player1_move = player1("")
+        player2_move = player2("")
+        
+        if verbose:
+            print(f"Game {i + 1}: Player 1 chose {player1_move}, Player 2 chose {player2_move}")
+        
+        if player1_move == player2_move:
+            continue  # It's a tie, no score change
+        
+        # Determine winner
+        if (player1_move == "R" and player2_move == "S") or \
+           (player1_move == "S" and player2_move == "P") or \
+           (player1_move == "P" and player2_move == "R"):
+            results["Player 1"] += 1
+        else:
+            results["Player 2"] += 1
+
+    print(f"Final Results after {num_games} games:")
+    print(f"Player 1 wins: {results['Player 1']}")
+    print(f"Player 2 wins: {results['Player 2']}")
+    print(f"Draws: {num_games - results['Player 1'] - results['Player 2']}")
+
