@@ -1,10 +1,23 @@
-# The example function below keeps track of the opponent's history and plays whatever the opponent played two plays ago. It is not a very good player so you will need to change the code to pass the challenge.
+import random
 
-def player(prev_play, opponent_history=[]):
+# This function will play against various bots in the challenge
+def player(prev_play: str, opponent_history = []):
+    # If it's the first move, choose randomly
+    if prev_play == "":
+        return random.choice(["R", "P", "S"])
+    
+    # Store opponent's previous move
     opponent_history.append(prev_play)
+    
+    # Simple strategy: Counter the opponent's last move
+    last_opponent_move = opponent_history[-1]
+    
+    if last_opponent_move == "R":
+        return "P"  # Paper beats Rock
+    elif last_opponent_move == "P":
+        return "S"  # Scissors beats Paper
+    elif last_opponent_move == "S":
+        return "R"  # Rock beats Scissors
 
-    guess = "R"
-    if len(opponent_history) > 2:
-        guess = opponent_history[-2]
-
-    return guess
+    # If no matching strategy is found, choose randomly
+    return random.choice(["R", "P", "S"])
