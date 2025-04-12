@@ -36,3 +36,20 @@ class UnitTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+import unittest
+from RPS import player
+
+class TestRPS(unittest.TestCase):
+    def test_first_move(self):
+        # Test the first move is randomly chosen
+        result = player("")
+        self.assertIn(result, ["R", "P", "S"])
+
+    def test_counter_strategy(self):
+        # Test that the player correctly counters the opponent's previous move
+        self.assertEqual(player("R"), "P")  # Paper beats Rock
+        self.assertEqual(player("P"), "S")  # Scissors beats Paper
+        self.assertEqual(player("S"), "R")  # Rock beats Scissors
+
+if __name__ == "__main__":
+    unittest.main()
